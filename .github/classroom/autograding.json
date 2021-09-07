@@ -2,8 +2,8 @@
   "tests": [
     {
       "name": "index.html exists",
-      "setup": "NIDX=$(ls | grep index.html | wc -l) ",
-      "run": "if [ \"$NIDX\" -eq \"1\" ]; then echo \"TRUE\"; fi",
+      "setup": "",
+      "run": "NIDX=$(ls | grep index.html | wc -l) && if [ $NIDX -eq 1 ]; then echo \"TRUE\"; fi",
       "input": "",
       "output": "TRUE",
       "comparison": "exact",
@@ -12,8 +12,8 @@
     },
     {
       "name": "styles.css exists",
-      "setup": "NCSS=$(ls | grep *.css | wc -l)",
-      "run": "if [ \"$NCSS\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "setup": "",
+      "run": "NCSS=$(ls | grep *.css | wc -l) && if [ $NCSS -ge 1 ]; then echo \"TRUE\"; fi",
       "input": "",
       "output": "TRUE",
       "comparison": "exact",
@@ -105,8 +105,8 @@
       "setup": "NBDR=$(cat *.css | grep -o 'border.*:.*;' | wc -l)",
       "run": "if [ \"$NBDR\" -ge \"1\" ]; then echo \"TRUE\"; fi",
       "input": "",
-      "output": "",
-      "comparison": "included",
+      "output": "TRUE",
+      "comparison": "exact",
       "timeout": 10,
       "points": 5
     },
