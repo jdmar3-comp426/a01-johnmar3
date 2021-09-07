@@ -1,0 +1,164 @@
+{
+  "tests": [
+    {
+      "name": "index.html exists",
+      "setup": "NIDX=$(ls | grep index.html | wc -l) ",
+      "run": "if [ \"$NIDX\" -eq \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "styles.css exists",
+      "setup": "NCSS=$(ls | grep *.css | wc -l)",
+      "run": "if [ \"$NCSS\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "At least 4 HTML files exist, including index.html",
+      "setup": "NHTML=$(ls | grep .html | wc -l)",
+      "run": "if [ \"$NHTML\" -ge \"4\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "All pages link back to index.html",
+      "setup": "NILINK=$(cat *.html | grep -o '<a .*href=.*index.html.*' | wc -l)",
+      "run": "if [ \"$NILINK\" -ge \"3\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "index.html contains links to other pages",
+      "setup": "NOLINK=$(cat index.html | grep -o '<a .*href=.*.html.*' | wc -w)",
+      "run": "if [ \"$NOLINK\" -ge \"3\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "All HTML files parse as valid HTML",
+      "setup": "npm i -g html-validate",
+      "run": "html-validate *.html",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "styles.css parses as valid CSS",
+      "setup": "npm install -g css-validator",
+      "run": "css-validator *.css",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "CSS file has at least 10 selectors",
+      "setup": "npm install -g updated-bless",
+      "run": "NSEL=$(blessc count --no-color *.css | sed -n '3p' | sed -e 's/^[ \\t]*//') && if [ \"$NSEL\" -ge \"10\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Two or more fonts used in styles.css",
+      "setup": "NFONT=$(cat *.css | grep -o 'font-family' | wc -l)",
+      "run": "if [ \"$NFONT\" -ge \"2\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Set background color of some elements specified by hex notation",
+      "setup": "NBKG=$(cat *.css | grep -o 'background.*:.*#.*;' | wc -l)",
+      "run": "if [ \"$NBKG\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Set the border of some elements",
+      "setup": "NBDR=$(cat *.css | grep -o 'border.*:.*;' | wc -l)",
+      "run": "if [ \"$NBDR\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Set the :hover pseudo-class for one or more elements",
+      "setup": "NHOV=$(cat *.css | grep -o '.*:hover.*{' | wc -l)",
+      "run": "if [ \"$NHOV\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Have at least one class-based selector",
+      "setup": "NCLS=$(cat *.css | grep -o '.*\\..*{' | wc -l)",
+      "run": "if [ \"$NCLS\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Have at least one id-based selector",
+      "setup": "NID=$(cat *.css | grep -o '.*#.*{' | wc -l)",
+      "run": "if [ \"$NID\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Have at least one selector rely on the hierarchical relationship between two elements",
+      "setup": "NHIER=$(cat *.css | grep -o '.*\\w\\s\\w.*{' | wc -l)",
+      "run": "if [ \"$NHIER\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Use width and/or height to control the geometry of an element",
+      "setup": "NGEO=$(cat *.css | grep -o '.*\\(width\\|height\\).*:.*;' | wc -l)",
+      "run": "if [ \"$NGEO\" -ge \"1\" ]; then echo \"TRUE\"; fi",
+      "input": "",
+      "output": "TRUE",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    }
+  ]
+}
