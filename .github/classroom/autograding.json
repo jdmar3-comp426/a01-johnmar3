@@ -2,7 +2,7 @@
   "tests": [
     {
       "name": "index.html exists",
-      "setup": "",
+      "setup": "/bin/bash",
       "run": "NIDX=$(ls | grep index.html | wc -l) && if [ $NIDX -eq 1 ]; then echo \"TRUE\"; fi",
       "input": "",
       "output": "TRUE",
@@ -12,7 +12,7 @@
     },
     {
       "name": "styles.css exists",
-      "setup": "",
+      "setup": "/bin/bash",
       "run": "NCSS=$(ls | grep *.css | wc -l) && if [ $NCSS -ge 1 ]; then echo \"TRUE\"; fi",
       "input": "",
       "output": "TRUE",
@@ -22,8 +22,8 @@
     },
     {
       "name": "At least 4 HTML files exist, including index.html",
-      "setup": "NHTML=$(ls | grep .html | wc -l)",
-      "run": "if [ \"$NHTML\" -ge \"4\" ]; then echo \"TRUE\"; fi",
+      "setup": "/bin/bash",
+      "run": "NHTML=$(ls | grep .html | wc -l) && if [ $NHTML -ge 4 ]; then echo \"TRUE\"; fi",
       "input": "",
       "output": "TRUE",
       "comparison": "exact",
@@ -32,8 +32,8 @@
     },
     {
       "name": "All pages link back to index.html",
-      "setup": "NILINK=$(cat *.html | grep -o '<a .*href=.*index.html.*' | wc -l)",
-      "run": "if [ \"$NILINK\" -ge \"3\" ]; then echo \"TRUE\"; fi",
+      "setup": "/bin/bash",
+      "run": "NILINK=$(cat *.html | grep -o '<a .*href=.*index.html.*' | wc -l)&& if [ $NILINK -ge 3 ]; then echo \"TRUE\"; fi",
       "input": "",
       "output": "TRUE",
       "comparison": "exact",
