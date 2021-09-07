@@ -72,8 +72,8 @@
     },
     {
       "name": "CSS file has at least 10 selectors",
-      "setup": "SHELL=/bin/bash && npm install -g updated-bless",
-      "run": "NSEL=$(blessc count --no-color *.css | sed -n '3p' | sed -e 's/^[ \\t]*//') && if [ \"$NSEL\" -ge \"10\" ]; then echo \"TRUE\"; fi",
+      "setup": "SHELL=/bin/bash",
+      "run": "NSEL=$(cat styles.css | grep -o '.*{' | wc -l) && if [ \"$NSEL\" -ge \"10\" ]; then echo \"TRUE\"; fi",
       "input": "",
       "output": "TRUE",
       "comparison": "exact",
